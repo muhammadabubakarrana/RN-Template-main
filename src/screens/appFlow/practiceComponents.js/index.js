@@ -69,14 +69,14 @@ function PracticeComponent() {
                             onPress={() => navigate(routes.signup)}
                         />
                     </Wrapper>
-                    <Wrapper marginHorizontalSmall>
+                    {/* <Wrapper marginHorizontalSmall>
                         <Chips.Primary
                             disabled
                             containerStyle={{ flexWrap: "wrap" }}
                             // buttonStyle={{ backgroundColor: 'blue' }}
                             // textStyle={{ color: 'white' }} 
                             data={data.map((item) => <Buttons.ColoredSmall key={item.keyName} text={item.text} />)} />
-                    </Wrapper>
+                    </Wrapper> */}
                     <Icons.Button iconStyle={{ marginTop: height(1) }} iconName="youtube-tv" badgeValue="100" showBadge />
                 </ScrollViews.KeyboardAvoiding>
             </Wrapper>
