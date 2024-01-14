@@ -1,81 +1,114 @@
-import React, { Component } from 'react';
-import { View, Image, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
-import { Wrapper, Text, Lines, Cards, StatusBars, ItemsList, Headers, Images } from '../../../components';
-import { appImages, appStyles, colors, routes, sizes } from '../../../services';
-import { height, width, totalSize } from "react-native-dimension";
-import { useDispatch, useSelector } from 'react-redux';
-import { addCartItem } from '../../../reduxTookit/cartSlice';
-
+import React, {Component} from 'react';
+import {
+  View,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
+import {
+  Wrapper,
+  Text,
+  Lines,
+  Cards,
+  StatusBars,
+  ItemsList,
+  Headers,
+  Images,
+} from '../../../components';
+import {appImages, appStyles, colors, routes, sizes} from '../../../services';
+import {height, width, totalSize} from 'react-native-dimension';
+import {useDispatch, useSelector} from 'react-redux';
+import {addCartItem} from '../../../reduxTookit/cartSlice';
 
 function Home(props) {
-  const { navigate } = props.navigation;
+  const {navigate} = props.navigation;
   const dispatch = useDispatch();
   const addedItems = useSelector(state => state);
   console.log(addedItems);
-  const addItem = (item) => {
-    dispatch(addCartItem(item))
-  }
+  const addItem = item => {
+    dispatch(addCartItem(item));
+  };
   const data = [
     {
-      price: "$77",
+      price: '$77',
       num: 1,
-      img: appImages.ShoeOne
+      img: appImages.ShoeOne,
     },
     {
-      price: "$67",
+      price: '$67',
       num: 2,
-      img: appImages.ShoeTwo
+      img: appImages.ShoeTwo,
     },
     {
-      price: "$54",
+      price: '$54',
       num: 3,
-      img: appImages.ShoeThree
+      img: appImages.ShoeThree,
     },
     {
-      price: "$67",
+      price: '$67',
       num: 4,
-      img: appImages.ShoeFour
+      img: appImages.ShoeFour,
     },
     {
-      price: "$99",
+      price: '$99',
       num: 5,
-      img: appImages.ShoeTwo
+      img: appImages.ShoeTwo,
     },
     {
-      price: "$67",
+      price: '$67',
       num: 6,
-      img: appImages.ShoeFive
+      img: appImages.ShoeFive,
     },
-  ]
+  ];
 
   return (
-    <Wrapper isMain >
+    <Wrapper isMain>
       <View style={styles.redux}>
-        <Text isMediumTitle isBoldFont>REDUX APP</Text>
-        <TouchableOpacity onPress={() => navigate(routes.ADD_TO_CART)} style={styles.shopingRow}>
-          <Image resizeMode='contain' source={appImages.Shoping} style={styles.shoping} />
-          <Text isBoldFont isXLTitle >{addedItems.cart.length}</Text>
+        <Text isMediumTitle isBoldFont>
+          REDUX APP
+        </Text>
+        <TouchableOpacity
+          onPress={() => navigate(routes.ADD_TO_CART)}
+          style={styles.shopingRow}>
+          <Image
+            resizeMode="contain"
+            source={appImages.Shoping}
+            style={styles.shoping}
+          />
+          <Text isBoldFont isXLTitle>
+            {addedItems.cart.length}
+          </Text>
         </TouchableOpacity>
       </View>
       {/* <Spacer isBasic /> */}
       {/* <ItemsList onPress={() => { addItem() }} data={data} /> */}
       <FlatList
         data={data}
-        renderItem={({ item, index }) => (
+        renderItem={({item, index}) => (
           <View style={styles.row}>
-            <View style={styles.boxTxt} >
-              <Text style={styles.numTxt} isSmallTitle >{`Shoe ${item.num}`}</Text>
-              <TouchableOpacity onPress={() => { addItem(item) }} style={styles.btn}>
-                <Text isSmallTitle style={styles.txt} >Add To Cart</Text>
+            <View style={styles.boxTxt}>
+              <Text
+                style={styles.numTxt}
+                isSmallTitle>{`Shoe ${item.num}`}</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  addItem(item);
+                }}
+                style={styles.btn}>
+                <Text isSmallTitle style={styles.txt}>
+                  Add To Cart
+                </Text>
               </TouchableOpacity>
             </View>
-            <Text style={styles.priceTxt} isSmallTitle>{item.price}</Text>
-            <Images.SqareRound width style={styles.img} source={item.img} />
+            <Text style={styles.priceTxt} isSmallTitle>
+              {item.price}
+            </Text>
+            <Images.Round style={styles.img} source={item.img} />
           </View>
         )}
       />
     </Wrapper>
-
   );
 }
 
@@ -86,32 +119,32 @@ const styles = StyleSheet.create({
     ...appStyles.alignItemsCenter,
     ...appStyles.justifyContentSpaceBetween,
     ...appStyles.marginHorizontalSmall,
-    ...appStyles.marginVerticalSmall
+    ...appStyles.marginVerticalSmall,
   },
   shopingRow: {
     ...appStyles.flexDirectionRow,
     ...appStyles.alignItemsCenter,
     ...appStyles.justifyContentSpaceBetween,
-    backgroundColor: "lightgreen",
+    backgroundColor: 'lightgreen',
     borderRadius: totalSize(4),
     ...appStyles.paddingHorizontalSmall,
   },
   shoping: {
     height: height(5),
     width: width(8),
-    ...appStyles.marginHorizontalTiny
+    ...appStyles.marginHorizontalTiny,
   },
   back: {
     height: height(10),
-    width: width(15)
+    width: width(15),
   },
   row: {
     ...appStyles.flexDirectionRow,
-    alignItems: "center",
-    justifyContent: "space-between",
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginVertical: height(1),
     ...appStyles.borderedWrapper,
-    backgroundColor: colors.appBgColor3
+    backgroundColor: colors.appBgColor3,
   },
   txt: {
     ...appStyles.buttonText,
@@ -126,15 +159,15 @@ const styles = StyleSheet.create({
   },
   img: {
     height: height(12),
-    width: width(24)
+    width: width(24),
   },
   boxTxt: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   numTxt: {
-    color: "red"
+    color: 'red',
   },
   priceTxt: {
-    color: "blue"
-  }
+    color: 'blue',
+  },
 });
